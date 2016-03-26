@@ -1,0 +1,53 @@
+Port of Havana:
+  image: 'maps/Port of Havana.jpg'
+  container:
+    - 'Havana'
+    - 'Cuba'
+    - 'Gulf of Mexico'
+  connections:
+
+Havana:
+  image: 'maps/Havana.jpg'
+  container:
+    - 'Cuba'
+    - 'Gulf of Mexico'
+  connections:
+    Port of Havana: [0.5,0.3]
+
+Skull Cave:
+  image: 'maps/skull cave.jpg'
+  container:
+    - 'Cayo Blanquizal'
+    - 'Cuba'      
+    - 'Gulf of Mexico'
+  connections:
+
+Cayo Blanquizal:
+  image: 'maps/map2.jpg'
+  container:
+    - 'Cuba'
+    - 'Gulf of Mexico'
+  connections:
+    Skull Cave: [0.4,0.25]
+
+Boop:
+  image: 'maps/map2.jpg'
+  container:
+    - 'Cuba'
+    - 'Gulf of Mexico'
+  connections:
+
+Cuba:
+  image: 'maps/Cuba.jpg'
+  container:
+    - 'Gulf of Mexico'
+  connections:
+    Cayo Blanquizal: [0.45,0.6]
+    Havana: [0.25,0.6]
+    Boop: [.25,.25]
+
+Gulf of Mexico:
+  image: 'maps/Gulf of Mexico.jpg'
+  container:
+  connections:
+    Cuba: [.6,.5]

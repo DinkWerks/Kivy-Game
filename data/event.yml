@@ -1,0 +1,59 @@
+dink_0001:
+  condition:
+    Level: Player.Gold > 10
+  1: "/This is action 1, / Name /./ /[Next Slide]/"
+  2: "/This is action 2./ /[Terminate]/"
+  modifier:
+    Gold: 10
+    Level: 1
+
+dink_0002:
+  condition:
+    Level: Player.Level > 0
+  1: "/Event 2 Action 1/ /[Next Slide]/"
+  2: "/Event 2 Action 2/ /[Terminate]/"
+  modifier:
+    Gold: 1
+    Inventory:
+      'An Owl Crossed with a Bungee Cord' : 1
+      'My Ass' : 1
+      'Shoes' : 1
+  enemy: 'a smol snek'
+
+dink_0003:
+  condition:
+    Level: Player.Level > 0
+  1: '/Action 3/ /[Next Slide]/'
+  2: '/The snake was defeated you lord amongst men!/ /[Terminate]/'
+  enemy: 'a smol snek'
+  modifier:
+    Gold: 10
+
+dink_0004:
+  condition:
+    Level: Player.Level < 0
+  1: 'Action 4'
+dink_0005:
+  condition:
+    Level: Player.Level < 0
+  1: 'Action 5'
+dink_0006:
+  condition:
+    Level: Player.Level < 0
+  1: 'Action 6'
+dink_0007:
+  condition:
+    Level: Player.Level < 0
+  1: 'Action 7'
+dink_0008:
+  condition:
+    Level: Player.Level < 0
+  1: 'Action 8'
+dink_0009:
+  condition:
+    Level: Player.Level < 0
+  1: 'Action 9'
+dink_0010:
+  condition:
+    Level: Player.Level < 0
+  1: 'Action 10'

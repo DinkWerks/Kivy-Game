@@ -1,0 +1,23 @@
+character:
+  Name: 'Dink'
+  Is_Person: True
+  Level: 3
+  Gold: 100
+  stats:
+    hp: 20
+    str: 14
+    agi: 2
+    acc: 4
+    end: 2
+    per: 3
+    spd: 3
+    armor: 2
+  equipped:
+    - 'Vorpal Cod'
+  attb:
+    eyes: 'blue'
+    hair: 'black'
+  Inventory:
+    'Sword' : 1
+    'Shoes' : 1
+  Condition:

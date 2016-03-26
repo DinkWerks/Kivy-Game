@@ -1,0 +1,35 @@
+'a smol snek':
+  Name: 'a small snake'
+  Level: 2
+  stats:
+    hp : 10
+    str: 3
+    agi: 5
+    acc: 3
+    end: 2
+    spd: 2
+    armor: 0
+  attack:
+    name: 'bite'
+    alt name: 'chomp'
+    damage: 2
+    range: 1
+    type: 'pierce'
+
+'a big snek':
+  Name: 'a big snake'
+  Level: 3
+  stats:
+    hp : 15
+    str: 6
+    agi: 2
+    acc: 3
+    end: 5
+    spd: 2
+    armor: 2
+  attacks:
+    bite:
+      - 'pierce'
+    p_bite:
+      - 'poisoned': 3
+      - 'pierce'

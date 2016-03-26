@@ -1,0 +1,91 @@
+<EventWindow>
+    BoxLayout:
+        pos: 100,100
+        size_hint: .4,.7
+        orientation: 'vertical'
+        Image:
+            source: 'maps/map.jpg'
+            pos: self.pos
+            size: self.size
+        ScrollView:
+            canvas.before:
+                Color:
+                    rgba: [.2,.2,.2,.8]
+                Rectangle:
+                    size: self.size
+                    pos: self.pos
+            Label:
+                id: text_area
+                text: root.ct
+                padding: 15,10
+                text_size: self.width, None
+                size_hint_y: None
+                height: self.texture_size[1]
+
+
+
+<Foo>:
+    id: bl
+    popup: popup.__self__
+    header: header
+    BoxLayout:
+        orientation: 'vertical'
+
+        BoxLayout:
+            id: header
+            size_hint: 1,.05
+            canvas.before:
+                Rectangle:
+                    source: 'images/topbar.png'
+                    pos: self.pos
+                    size: self.size
+            Button:
+                text: 'Menu'
+                font_size: self.width * .25
+                text_size: self.size
+                halign: 'center'
+                valign: 'middle'
+                color: 0,0,0,1
+                pos: 0,0
+                size_hint: .1,1
+                on_release: root.popup.open()
+            Button:
+                id: mb
+                text: root.current_location
+                color: 0,0,0,1
+                background_normal: 'images/button.png'
+                background_down: 'images/button.png'
+                border: 0,60,0,120
+        FloatLayout:
+            id: mapspace
+            canvas:
+                Color:
+                    rgba: .7,.7,.7,1
+                Rectangle:
+                    id: background
+                    source: root.current_map
+                    pos: self.pos
+                    size: self.size
+            EventWindow:
+                id: event
+
+    Popup:
+        id: popup
+        on_parent: if self.parent == bl: bl.remove_widget(self)
+        size_hint: .3,.6
+        title: "Menu"
+        title_align: 'center'
+        separator_color: .3,0,0,1
+        content: popupcontent
+        BoxLayout:
+            orientation: 'vertical'
+            id: popupcontent
+            Button:
+                text: 'Save'
+            Button:
+                text: 'Load'
+            Button:
+                text: 'Main Menu'
+            Button:
+                text: "Return to Game"
+                on_release: popup.dismiss()

@@ -1,0 +1,9 @@
+weapon:
+  Vorpal Cod:
+    name: 'Vorpal Cod Fish of the Bear'
+    alt name: 'fish'
+    damage: 1
+    range: 1
+    type: 'blunt'
+    stats:
+      agi: 2
