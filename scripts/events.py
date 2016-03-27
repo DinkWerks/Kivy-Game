@@ -1,12 +1,13 @@
 import yaml
 import random
 from kivy.properties import StringProperty
+from kivy.event import EventDispatcher
 from shlex import shlex
 from player import Player
 from enemy import Enemy
 
 
-class Event(Player):
+class Event(EventDispatcher, Player):
     open_events = file('data/event.yml', 'r')
     event_file = yaml.load(open_events)
     current_text = StringProperty('1234')

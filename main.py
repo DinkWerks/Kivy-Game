@@ -23,7 +23,7 @@ class EventWindow(BoxLayout):
         super(EventWindow, self).__init__(**kwargs)
         self.ct = event.current_text
         # Error occurs below. Comment out too see semi-functional app.
-        Event.bind(current_text=self.setter('ct'))
+        event.bind(current_text=self.setter('ct'))
 
 
 class Foo(BoxLayout):
