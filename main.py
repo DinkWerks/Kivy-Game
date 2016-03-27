@@ -2,7 +2,6 @@
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.dropdown import DropDown
 from kivy.uix.button import Button
-from kivy.uix.label import Label
 from kivy.properties import ObjectProperty, StringProperty
 from kivy.app import App
 # Utility Imports
@@ -14,12 +13,11 @@ from scripts.events import Event
 loc_file = file('data/location.yml')
 loc_dat = yaml.load(loc_file)
 
-# Binding Classes
+# Bind Classes
 event = Event()
 
-
 class EventWindow(BoxLayout):
-    ct = ObjectProperty()
+    ct = StringProperty('')
 
     def __init__(self, **kwargs):
         super(EventWindow, self).__init__(**kwargs)
@@ -27,11 +25,11 @@ class EventWindow(BoxLayout):
 
 ew = EventWindow()
 
+
 class Foo(BoxLayout):
     current_map = ObjectProperty('maps/Havana.jpg')
     current_location = StringProperty()
     containers = ObjectProperty(loc_dat['Havana']['container'], allownone=True)
-
 
     def __init__(self, **kwargs):
         super(Foo, self).__init__(**kwargs)
@@ -41,11 +39,11 @@ class Foo(BoxLayout):
         self.locale = loc_dat['Havana']['connections']
         self.first_run = False
 
-        # Below section handles the location drop down
-        self.dropdown = DropDown()
-        self.dd_updater()
-        self.ids.mb.bind(on_release=self.dropdown.open)  # opens the existing dropdown with added buttons
-        self.dropdown.bind(on_select=lambda instance, x: self.location(x))
+        # Drop Down code
+        self.dropdown = DropDown()  # Binds Class
+        self.dd_updater()  # Calls method to determine location containers
+        self.ids.mb.bind(on_release=self.dropdown.open)  # Connects generated locations to
+        self.dropdown.bind(on_select=lambda instance, x: self.location(x))  # Binds button's location changing behavior
 
         # Handles the placement of buttons on the map
         self.place_locale()
@@ -68,9 +66,7 @@ class Foo(BoxLayout):
 
     def cleanup(self):
         for child in [child for child in self.ids.mapspace.children]:
-            # if child.id == 'pb':
             self.ids.mapspace.remove_widget(child)
-        # self.ids.mapspace.remove_widget(EventWindow)
         self.ids.mapspace.add_widget(self.ids.event)
 
     def dd_updater(self):
@@ -97,7 +93,6 @@ class Foo(BoxLayout):
         event.event_name()
         event.parse()
         print event.current_text
-        # ew.changer()
         self.dd_updater()
         self.place_locale()
 
