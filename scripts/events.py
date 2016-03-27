@@ -1,6 +1,6 @@
 import yaml
 import random
-from kivy.properties import ObjectProperty
+from kivy.properties import StringProperty
 from shlex import shlex
 from player import Player
 from enemy import Enemy
@@ -9,13 +9,13 @@ from enemy import Enemy
 class Event(Player):
     open_events = file('data/event.yml', 'r')
     event_file = yaml.load(open_events)
-    current_text = ObjectProperty('1234')
+    current_text = StringProperty('1234')
 
     def __init__(self):
         Player.__init__(self)
         self.events = Event.event_file
         self.selection = ''
-        self.current_text = ''
+        self.current_text = '1234'
 
     def event_name(self):
         eid = random.choice(Event.event_file.keys())

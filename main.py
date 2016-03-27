@@ -22,6 +22,8 @@ class EventWindow(BoxLayout):
     def __init__(self, **kwargs):
         super(EventWindow, self).__init__(**kwargs)
         self.ct = event.current_text
+        # Error occurs below. Comment out too see semi-functional app.
+        Event.bind(current_text=self.setter('ct'))
 
 ew = EventWindow()
 
