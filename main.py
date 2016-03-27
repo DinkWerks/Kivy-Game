@@ -25,8 +25,6 @@ class EventWindow(BoxLayout):
         # Error occurs below. Comment out too see semi-functional app.
         Event.bind(current_text=self.setter('ct'))
 
-ew = EventWindow()
-
 
 class Foo(BoxLayout):
     current_map = ObjectProperty('maps/Havana.jpg')
