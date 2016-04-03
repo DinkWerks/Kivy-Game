@@ -1,16 +1,18 @@
 <EventWindow>:
+    id: ew
+    size_hint: .4,1
+    pos_hint: {'center_x': .5}
     BoxLayout:
-        pos: 100,100
-        size_hint: .4,.7
         orientation: 'vertical'
         Image:
             source: 'maps/map.jpg'
             pos: self.pos
             size: self.size
         ScrollView:
+            size_hint: 1, 1.7
             canvas.before:
                 Color:
-                    rgba: [.2,.2,.2,.8]
+                    rgba: [.2,.2,.2,1]
                 Rectangle:
                     size: self.size
                     pos: self.pos
@@ -21,6 +23,15 @@
                 text_size: self.width, None
                 size_hint_y: None
                 height: self.texture_size[1]
+        BoxLayout:
+            size_hint: 1,.2
+            Button:
+                text: 'Previous'
+                on_release: root.slide_change('Previous')
+            Button:
+                id: Next_Slide
+                text: root.button_status
+                on_release: root.slide_change(root.button_status)
 
 
 
@@ -66,8 +77,6 @@
                     source: root.current_map
                     pos: self.pos
                     size: self.size
-            EventWindow:
-                id: event
 
     Popup:
         id: popup

@@ -11,12 +11,15 @@ class Event(EventDispatcher, Player):
     open_events = file('data/event.yml', 'r')
     event_file = yaml.load(open_events)
     current_text = StringProperty('1234')
+    command = StringProperty('')
 
     def __init__(self):
         Player.__init__(self)
         self.events = Event.event_file
         self.selection = ''
         self.current_text = '1234'
+        self.driver = 1
+        self.command = ''
 
     def event_name(self):
         eid = random.choice(Event.event_file.keys())
@@ -33,26 +36,23 @@ class Event(EventDispatcher, Player):
             self.event_name()
 
     def parse(self):
-        driver = 1
         variables = ('Name', 'Is_Person', 'Level', 'Gold')
         poss_commands = ("[Next Slide]", "[Query]", "[Terminate]", "[Combat]")
 
-        while driver >= 0:
-            text = self.events[self.selection][driver]
-            lexer = shlex(text)
-            lexer.quotes = '/'
+        text = self.events[self.selection][self.driver]
+        lexer = shlex(text)
+        lexer.quotes = '/'
 
-            output = ''
-            command = ''
-            for token in lexer:
-                if token in variables:
-                    output += str(eval('Player.' + token))
-                elif token.replace('/', '') in poss_commands:
-                    command += token.replace('/', '')
-                else:
-                    output += token.replace('/', '')
-            self.current_text = output
-            driver += self.controller(command)
+        output = ''
+        print self.command
+        for token in lexer:
+            if token in variables:
+                output += str(eval('Player.' + token))
+            elif token.replace('/', '') in poss_commands:
+                self.command = token.replace('/', '')
+            else:
+                output += token.replace('/', '')
+        self.current_text = output
         self.modifier()
 
     def modifier(self):
@@ -79,11 +79,16 @@ class Event(EventDispatcher, Player):
 
     def controller(self, cmd):
         if cmd == "[Next Slide]":
-            return 1
+            self.driver += 1
+        elif cmd == "Previous":
+            if self.driver > 1:
+                self.driver -= 1
+            else:
+                pass
         elif cmd == "[Query]":
             return 0
         elif cmd == "[Terminate]":
-            return -99
+            self.driver = 1
         elif cmd == '[Combat]':
             enemy = self.events[self.selection]['enemy']
             enemy_stats = Enemy(enemy)
@@ -94,6 +99,7 @@ class Event(EventDispatcher, Player):
         else:
             print "Event failed to terminate."
             return -99
+        self.parse()
 
 
 class Combat:

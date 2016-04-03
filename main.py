@@ -18,16 +18,29 @@ event = Event()
 
 class EventWindow(BoxLayout):
     ct = StringProperty('')
+    button_status = StringProperty('')
 
     def __init__(self, **kwargs):
         super(EventWindow, self).__init__(**kwargs)
         self.ct = event.current_text
-        # Error occurs below. Comment out too see semi-functional app.
+        self.button_status = event.command
         event.bind(current_text=self.setter('ct'))
+        event.bind(command=self.setter('button_status'))
+
+    def slide_change(self, cmd):
+        poss_commands = ("[Next Slide]", "[Query]", "[Terminate]", "[Combat]", 'Previous')
+        if cmd == '[Terminate]':
+            event.controller(cmd)
+            self.parent.remove_widget(self)
+        elif cmd in poss_commands:
+            event.controller(cmd)
+        else:
+            print args[0]
+            print "Event command not recognized. Please check the event file."
 
 
 class Foo(BoxLayout):
-    current_map = ObjectProperty('maps/Havana.jpg')
+    current_map = ObjectProperty('')
     current_location = StringProperty()
     containers = ObjectProperty(loc_dat['Havana']['container'], allownone=True)
 
@@ -45,8 +58,12 @@ class Foo(BoxLayout):
         self.ids.mb.bind(on_release=self.dropdown.open)  # Connects generated locations to
         self.dropdown.bind(on_select=lambda instance, x: self.location(x))  # Binds button's location changing behavior
 
+        # Widgets
+        self.ew = EventWindow()
+
         # Handles the placement of buttons on the map
         self.place_locale()
+
 
     def place_locale(self):
         if self.first_run is True:
@@ -63,11 +80,11 @@ class Foo(BoxLayout):
                                       on_release=lambda destination: self.location(destination.text))
                 self.ids.mapspace.add_widget(place_button)
         self.first_run = True
+        self.ids.mapspace.add_widget(self.ew)
 
     def cleanup(self):
         for child in [child for child in self.ids.mapspace.children]:
             self.ids.mapspace.remove_widget(child)
-        self.ids.mapspace.add_widget(self.ids.event)
 
     def dd_updater(self):
         self.dropdown.clear_widgets()
@@ -92,14 +109,14 @@ class Foo(BoxLayout):
         self.containers = loc_dat[new_loc]['container']
         event.event_name()
         event.parse()
-        print event.current_text
         self.dd_updater()
         self.place_locale()
 
-
 class Test(App):
     def build(self):
-        return Foo()
+        self.mainspace = Foo()
+        self.eventwindow = EventWindow()
+        return self.mainspace
 
 
 Test().run()

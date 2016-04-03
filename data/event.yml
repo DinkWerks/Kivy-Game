@@ -1,8 +1,10 @@
 dink_0001:
   condition:
     Level: Player.Gold > 10
-  1: "/This is action 1, / Name /./ /[Next Slide]/"
-  2: "/This is action 2./ /[Terminate]/"
+  1: "/This is action 1. / Name /./ /[Next Slide]/"
+  2: "/This is action 2. / Name /./ /[Next Slide]/"
+  3: "/This is action 3. / Name /./ /[Next Slide]/"
+  4: "/This is action 4./ /[Terminate]/"
   modifier:
     Gold: 10
     Level: 1
