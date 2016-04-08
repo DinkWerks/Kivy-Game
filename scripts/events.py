@@ -6,18 +6,17 @@ from shlex import shlex
 from player import Player
 from enemy import Enemy
 
-
 class Event(EventDispatcher, Player):
     open_events = file('data/event.yml', 'r')
     event_file = yaml.load(open_events)
-    current_text = StringProperty('1234')
+    current_text = StringProperty('')
     command = StringProperty('')
 
     def __init__(self):
         Player.__init__(self)
         self.events = Event.event_file
         self.selection = ''
-        self.current_text = '1234'
+        self.current_text = ''
         self.driver = 1
         self.command = ''
 
@@ -44,7 +43,6 @@ class Event(EventDispatcher, Player):
         lexer.quotes = '/'
 
         output = ''
-        print self.command
         for token in lexer:
             if token in variables:
                 output += str(eval('Player.' + token))
