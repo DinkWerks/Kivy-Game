@@ -3,15 +3,9 @@ Scratchpad.py
 
 *.pyc
 
-*.pyc
-
 scripts/__init__.pyc
 
-scripts/__init__.py
-
 scripts/player.pyc
-
-*.pyc
 
 scripts/events.pyc
 
